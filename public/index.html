@@ -3,122 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Data Entry Software</title>
 
 <style>
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
 }
 
 body{
-  background:#f4f4f4;
-  padding:20px;
+    background:#f4f4f4;
+    padding:20px;
 }
 
 h1{
-  text-align:center;
-  margin-bottom:20px;
-  color:#333;
+    text-align:center;
+    margin-bottom:20px;
+    color:#222;
 }
 
 .form-box{
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-  margin-bottom:20px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    margin-bottom:20px;
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
 }
 
-input, select{
-  padding:10px;
-  border:1px solid #ccc;
-  border-radius:5px;
-  width:100%;
+input,select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
 }
 
 .button-group{
-  margin-top:20px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
 button{
-  padding:10px 20px;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-  background:#007bff;
-  color:white;
-  font-weight:bold;
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 button:hover{
-  background:#0056b3;
+    background:#0056b3;
 }
 
-.filter-box{
-  background:white;
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:20px;
-  box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-}
-
-.filter-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
+.search-box{
+    flex:1;
 }
 
 .table-container{
-  overflow-x:auto;
+    overflow-x:auto;
+    background:white;
+    padding:10px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  background:white;
+    width:100%;
+    border-collapse:collapse;
 }
 
 table th{
-  background:#007bff;
-  color:white;
-  padding:10px;
-  border:1px solid #ccc;
+    background:#007bff;
+    color:white;
+    padding:10px;
+    border:1px solid #ccc;
 }
 
 table td{
-  padding:8px;
-  border:1px solid #ccc;
-  text-align:center;
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:center;
+}
+
+.filter-input{
+    width:100%;
+    padding:5px;
+    border:none;
+    outline:none;
 }
 
 @media(max-width:900px){
 
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .filter-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
 }
 
 </style>
 
 </head>
+
 <body>
 
 <h1>Data Entry Software</h1>
@@ -160,41 +158,13 @@ table td{
 
 <button onclick="addData()">Save Entry</button>
 
-<input type="text" id="searchInput" placeholder="Search Anything">
+<input 
+type="text" 
+id="searchInput" 
+class="search-box"
+placeholder="Search Anything">
 
 <button onclick="searchTable()">Search</button>
-
-</div>
-
-</div>
-
-<div class="filter-box">
-
-<h3 style="margin-bottom:15px;">Filter Data</h3>
-
-<div class="filter-grid">
-
-<input type="text" id="filterDate" placeholder="Filter Date">
-
-<input type="text" id="filterCompany" placeholder="Filter Company">
-
-<input type="text" id="filterProject" placeholder="Filter Project">
-
-<input type="text" id="filterParty" placeholder="Filter Party Name">
-
-<select id="filterStatus">
-<option value="">All Status</option>
-<option value="Clear">Clear</option>
-<option value="Pending">Pending</option>
-</select>
-
-</div>
-
-<div class="button-group">
-
-<button onclick="filterTable()">Apply Filter</button>
-
-<button onclick="resetFilter()">Reset Filter</button>
 
 </div>
 
@@ -224,6 +194,36 @@ table td{
 
 </tr>
 
+<tr>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+<th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
+
+</tr>
+
 </thead>
 
 <tbody id="tableBody">
@@ -236,162 +236,171 @@ table td{
 
 <script>
 
+// AUTO TODAY DATE
+
+window.onload = function(){
+
+    let today = new Date().toISOString().split('T')[0];
+
+    document.getElementById("date").value = today;
+
+}
+
+
+
+// SAVE ENTRY
+
 function addData(){
 
-let date = document.getElementById("date").value;
-let description = document.getElementById("description").value;
-let rate = document.getElementById("rate").value;
-let qty = document.getElementById("qty").value;
-let amount = document.getElementById("amount").value;
-let company = document.getElementById("company").value;
-let project = document.getElementById("project").value;
-let partyName = document.getElementById("partyName").value;
-let partyNumber = document.getElementById("partyNumber").value;
-let givenPayment = document.getElementById("givenPayment").value;
-let status = document.getElementById("status").value;
-let note = document.getElementById("note").value;
+    let date = document.getElementById("date").value;
+    let description = document.getElementById("description").value;
+    let rate = document.getElementById("rate").value;
+    let qty = document.getElementById("qty").value;
+    let amount = document.getElementById("amount").value;
+    let company = document.getElementById("company").value;
+    let project = document.getElementById("project").value;
+    let partyName = document.getElementById("partyName").value;
+    let partyNumber = document.getElementById("partyNumber").value;
+    let givenPayment = document.getElementById("givenPayment").value;
+    let status = document.getElementById("status").value;
+    let note = document.getElementById("note").value;
 
-if(amount === ""){
-amount = 0;
-}
+    if(amount == ""){
+        amount = 0;
+    }
 
-if(givenPayment === ""){
-givenPayment = 0;
-}
+    if(givenPayment == ""){
+        givenPayment = 0;
+    }
 
-let remainingPayment = amount - givenPayment;
+    let remainingPayment = amount - givenPayment;
 
-let table = document.getElementById("tableBody");
+    let row = `
 
-let row = `
+    <tr>
 
-<tr>
+    <td>${date}</td>
+    <td>${description}</td>
+    <td>${rate}</td>
+    <td>${qty}</td>
+    <td>${amount}</td>
+    <td>${company}</td>
+    <td>${project}</td>
+    <td>${partyName}</td>
+    <td>${partyNumber}</td>
+    <td>${givenPayment}</td>
+    <td>${remainingPayment}</td>
+    <td>${status}</td>
+    <td>${note}</td>
 
-<td>${date}</td>
-<td>${description}</td>
-<td>${rate}</td>
-<td>${qty}</td>
-<td>${amount}</td>
-<td>${company}</td>
-<td>${project}</td>
-<td>${partyName}</td>
-<td>${partyNumber}</td>
-<td>${givenPayment}</td>
-<td>${remainingPayment}</td>
-<td>${status}</td>
-<td>${note}</td>
+    </tr>
 
-</tr>
+    `;
 
-`;
+    document.getElementById("tableBody").innerHTML += row;
 
-table.innerHTML += row;
-
-clearForm();
+    clearForm();
 
 }
+
+
+
+// CLEAR FORM
 
 function clearForm(){
 
-document.getElementById("date").value = "";
-document.getElementById("description").value = "";
-document.getElementById("rate").value = "";
-document.getElementById("qty").value = "";
-document.getElementById("amount").value = "";
-document.getElementById("company").value = "";
-document.getElementById("project").value = "";
-document.getElementById("partyName").value = "";
-document.getElementById("partyNumber").value = "";
-document.getElementById("givenPayment").value = "";
-document.getElementById("note").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("rate").value = "";
+    document.getElementById("qty").value = "";
+    document.getElementById("amount").value = "";
+    document.getElementById("company").value = "";
+    document.getElementById("project").value = "";
+    document.getElementById("partyName").value = "";
+    document.getElementById("partyNumber").value = "";
+    document.getElementById("givenPayment").value = "";
+    document.getElementById("note").value = "";
 
 }
+
+
+
+// SEARCH FUNCTION
 
 function searchTable(){
 
-let input = document.getElementById("searchInput").value.toLowerCase();
+    let input = document.getElementById("searchInput").value.toLowerCase();
 
-let rows = document.querySelectorAll("#tableBody tr");
+    let rows = document.querySelectorAll("#tableBody tr");
 
-rows.forEach(row=>{
+    rows.forEach(row=>{
 
-let text = row.innerText.toLowerCase();
+        let text = row.innerText.toLowerCase();
 
-if(text.includes(input)){
-row.style.display = "";
-}else{
-row.style.display = "none";
+        if(text.includes(input)){
+            row.style.display = "";
+        }else{
+            row.style.display = "none";
+        }
+
+    });
+
 }
 
-});
 
-}
+
+// FILTER FUNCTION
 
 function filterTable(){
 
-let date = document.getElementById("filterDate").value.toLowerCase();
-let company = document.getElementById("filterCompany").value.toLowerCase();
-let project = document.getElementById("filterProject").value.toLowerCase();
-let party = document.getElementById("filterParty").value.toLowerCase();
-let status = document.getElementById("filterStatus").value.toLowerCase();
+    let filters = document.querySelectorAll(".filter-input");
 
-let rows = document.querySelectorAll("#tableBody tr");
+    let rows = document.querySelectorAll("#tableBody tr");
 
-rows.forEach(row=>{
+    rows.forEach(row=>{
 
-let cells = row.getElementsByTagName("td");
+        let cells = row.getElementsByTagName("td");
 
-let rowDate = cells[0].innerText.toLowerCase();
-let rowCompany = cells[5].innerText.toLowerCase();
-let rowProject = cells[6].innerText.toLowerCase();
-let rowParty = cells[7].innerText.toLowerCase();
-let rowStatus = cells[11].innerText.toLowerCase();
+        let show = true;
 
-let show = true;
+        filters.forEach((filter,index)=>{
 
-if(date && !rowDate.includes(date)){
-show = false;
+            let value = filter.value.toLowerCase();
+
+            if(value && !cells[index].innerText.toLowerCase().includes(value)){
+                show = false;
+            }
+
+        });
+
+        row.style.display = show ? "" : "none";
+
+    });
+
 }
 
-if(company && !rowCompany.includes(company)){
-show = false;
-}
 
-if(project && !rowProject.includes(project)){
-show = false;
-}
 
-if(party && !rowParty.includes(party)){
-show = false;
-}
+// ENTER KEY SUPPORT
 
-if(status && !rowStatus.includes(status)){
-show = false;
-}
+document.addEventListener("keypress", function(event){
 
-row.style.display = show ? "" : "none";
+    if(event.key === "Enter"){
+
+        let active = document.activeElement.id;
+
+        if(active === "searchInput"){
+
+            searchTable();
+
+        }else{
+
+            addData();
+
+        }
+
+    }
 
 });
-
-}
-
-function resetFilter(){
-
-document.getElementById("filterDate").value = "";
-document.getElementById("filterCompany").value = "";
-document.getElementById("filterProject").value = "";
-document.getElementById("filterParty").value = "";
-document.getElementById("filterStatus").value = "";
-
-let rows = document.querySelectorAll("#tableBody tr");
-
-rows.forEach(row=>{
-
-row.style.display = "";
-
-});
-
-}
 
 </script>
 
