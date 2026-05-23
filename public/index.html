@@ -236,7 +236,10 @@ placeholder="Search Anything">
 
 <script>
 
-// AUTO TODAY DATE
+const tableBody = document.getElementById("tableBody");
+
+
+// AUTO TODAY DATE + LOAD DATA
 
 window.onload = function(){
 
@@ -244,62 +247,107 @@ window.onload = function(){
 
     document.getElementById("date").value = today;
 
+    loadEntries();
+
 }
 
 
 
 // SAVE ENTRY
 
-function addData(){
+async function addData(){
 
-    let date = document.getElementById("date").value;
-    let description = document.getElementById("description").value;
-    let rate = document.getElementById("rate").value;
-    let qty = document.getElementById("qty").value;
-    let amount = document.getElementById("amount").value;
-    let company = document.getElementById("company").value;
-    let project = document.getElementById("project").value;
-    let partyName = document.getElementById("partyName").value;
-    let partyNumber = document.getElementById("partyNumber").value;
-    let givenPayment = document.getElementById("givenPayment").value;
-    let status = document.getElementById("status").value;
-    let note = document.getElementById("note").value;
+    let amount = Number(document.getElementById("amount").value) || 0;
 
-    if(amount == ""){
-        amount = 0;
-    }
+    let givenPayment = Number(document.getElementById("givenPayment").value) || 0;
 
-    if(givenPayment == ""){
-        givenPayment = 0;
-    }
+    let data = {
 
-    let remainingPayment = amount - givenPayment;
+        date: document.getElementById("date").value,
 
-    let row = `
+        description: document.getElementById("description").value,
 
-    <tr>
+        rate: document.getElementById("rate").value,
 
-    <td>${date}</td>
-    <td>${description}</td>
-    <td>${rate}</td>
-    <td>${qty}</td>
-    <td>${amount}</td>
-    <td>${company}</td>
-    <td>${project}</td>
-    <td>${partyName}</td>
-    <td>${partyNumber}</td>
-    <td>${givenPayment}</td>
-    <td>${remainingPayment}</td>
-    <td>${status}</td>
-    <td>${note}</td>
+        qty: document.getElementById("qty").value,
 
-    </tr>
+        amount: amount,
 
-    `;
+        company: document.getElementById("company").value,
 
-    document.getElementById("tableBody").innerHTML += row;
+        project: document.getElementById("project").value,
+
+        partyName: document.getElementById("partyName").value,
+
+        partyNumber: document.getElementById("partyNumber").value,
+
+        givenPayment: givenPayment,
+
+        remainingPayment: amount - givenPayment,
+
+        status: document.getElementById("status").value,
+
+        note: document.getElementById("note").value
+    };
+
+
+    await fetch("/save", {
+
+        method: "POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body: JSON.stringify(data)
+
+    });
+
 
     clearForm();
+
+    loadEntries();
+
+}
+
+
+
+// LOAD DATA
+
+async function loadEntries(){
+
+    let response = await fetch("/entries");
+
+    let data = await response.json();
+
+    tableBody.innerHTML = "";
+
+
+    data.forEach(entry => {
+
+        tableBody.innerHTML += `
+
+        <tr>
+
+        <td>${entry.date}</td>
+        <td>${entry.description}</td>
+        <td>${entry.rate}</td>
+        <td>${entry.qty}</td>
+        <td>${entry.amount}</td>
+        <td>${entry.company}</td>
+        <td>${entry.project}</td>
+        <td>${entry.partyName}</td>
+        <td>${entry.partyNumber}</td>
+        <td>${entry.givenPayment}</td>
+        <td>${entry.remainingPayment}</td>
+        <td>${entry.status}</td>
+        <td>${entry.note}</td>
+
+        </tr>
+
+        `;
+
+    });
 
 }
 
@@ -310,21 +358,30 @@ function addData(){
 function clearForm(){
 
     document.getElementById("description").value = "";
+
     document.getElementById("rate").value = "";
+
     document.getElementById("qty").value = "";
+
     document.getElementById("amount").value = "";
+
     document.getElementById("company").value = "";
+
     document.getElementById("project").value = "";
+
     document.getElementById("partyName").value = "";
+
     document.getElementById("partyNumber").value = "";
+
     document.getElementById("givenPayment").value = "";
+
     document.getElementById("note").value = "";
 
 }
 
 
 
-// SEARCH FUNCTION
+// SEARCH
 
 function searchTable(){
 
@@ -348,7 +405,7 @@ function searchTable(){
 
 
 
-// FILTER FUNCTION
+// FILTER
 
 function filterTable(){
 
