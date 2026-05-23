@@ -146,8 +146,10 @@ table td{
 <input type="number" id="givenPayment" placeholder="Given Payment">
 
 <select id="status">
+
 <option value="Clear">Clear</option>
 <option value="Pending">Pending</option>
+
 </select>
 
 <input type="text" id="note" placeholder="Note">
@@ -197,29 +199,17 @@ placeholder="Search Anything">
 <tr>
 
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
-
 <th><input class="filter-input" onkeyup="filterTable()" placeholder="Filter"></th>
 
 </tr>
@@ -239,7 +229,7 @@ placeholder="Search Anything">
 const tableBody = document.getElementById("tableBody");
 
 
-// AUTO TODAY DATE + LOAD DATA
+// AUTO TODAY DATE
 
 window.onload = function(){
 
@@ -252,8 +242,7 @@ window.onload = function(){
 }
 
 
-
-// SAVE ENTRY
+// SAVE DATA
 
 async function addData(){
 
@@ -264,45 +253,33 @@ async function addData(){
     let data = {
 
         date: document.getElementById("date").value,
-
         description: document.getElementById("description").value,
-
         rate: document.getElementById("rate").value,
-
         qty: document.getElementById("qty").value,
-
         amount: amount,
-
         company: document.getElementById("company").value,
-
         project: document.getElementById("project").value,
-
         partyName: document.getElementById("partyName").value,
-
         partyNumber: document.getElementById("partyNumber").value,
-
         givenPayment: givenPayment,
-
         remainingPayment: amount - givenPayment,
-
         status: document.getElementById("status").value,
-
         note: document.getElementById("note").value
+
     };
 
 
-    await fetch("/save", {
+    await fetch("/addData",{
 
-        method: "POST",
+        method:"POST",
 
         headers:{
             "Content-Type":"application/json"
         },
 
-        body: JSON.stringify(data)
+        body:JSON.stringify(data)
 
     });
-
 
     clearForm();
 
@@ -311,19 +288,17 @@ async function addData(){
 }
 
 
-
 // LOAD DATA
 
 async function loadEntries(){
 
-    let response = await fetch("/entries");
+    let response = await fetch("/getData");
 
     let data = await response.json();
 
     tableBody.innerHTML = "";
 
-
-    data.forEach(entry => {
+    data.forEach(entry=>{
 
         tableBody.innerHTML += `
 
@@ -352,33 +327,22 @@ async function loadEntries(){
 }
 
 
-
 // CLEAR FORM
 
 function clearForm(){
 
     document.getElementById("description").value = "";
-
     document.getElementById("rate").value = "";
-
     document.getElementById("qty").value = "";
-
     document.getElementById("amount").value = "";
-
     document.getElementById("company").value = "";
-
     document.getElementById("project").value = "";
-
     document.getElementById("partyName").value = "";
-
     document.getElementById("partyNumber").value = "";
-
     document.getElementById("givenPayment").value = "";
-
     document.getElementById("note").value = "";
 
 }
-
 
 
 // SEARCH
@@ -402,7 +366,6 @@ function searchTable(){
     });
 
 }
-
 
 
 // FILTER
@@ -434,7 +397,6 @@ function filterTable(){
     });
 
 }
-
 
 
 // ENTER KEY SUPPORT

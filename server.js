@@ -9,9 +9,9 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://<softwareweb248_db_user>:<RgULyQ6Eg6T9HD3t>@create-deployment.bmcdw3l.mongodb.net/?appName=Create-Deployment")
-.then(()=>console.log("MongoDB Connected"))
-.catch(err=>console.log(err));
+mongoose.connect("mongodb+srv://softwareweb248_db_user:RgULyQ6Eg6T9HD3t@create-deployment.bmcdw3l.mongodb.net/dataentry?retryWrites=true&w=majority&appName=Create-Deployment")
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(err));
 
 const EntrySchema = new mongoose.Schema({
 
@@ -33,28 +33,49 @@ const EntrySchema = new mongoose.Schema({
 
 const Entry = mongoose.model("Entry", EntrySchema);
 
+
+// GET DATA
+
 app.get("/getData", async(req,res)=>{
 
-    const data = await Entry.find();
+    const data = await Entry.find().sort({_id:-1});
 
     res.json(data);
 
 });
 
+
+// SAVE DATA
+
 app.post("/addData", async(req,res)=>{
 
-    const newData = new Entry(req.body);
+    try{
 
-    await newData.save();
+        const newData = new Entry(req.body);
 
-    res.json({message:"Data Saved"});
+        await newData.save();
+
+        res.json({
+            success:true,
+            message:"Data Saved"
+        });
+
+    }catch(error){
+
+        res.status(500).json({
+            success:false,
+            message:error.message
+        });
+
+    }
 
 });
+
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, ()=>{
 
-    console.log("Server Running");
+    console.log(`Server Running On Port ${PORT}`);
 
 });
