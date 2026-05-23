@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://softwareweb248_db_user:RgULyQ6Eg6T9HD3t@create-deployment.bmcdw3l.mongodb.net/dataentry?retryWrites=true&w=majority&appName=Create-Deployment")
+mongoose.connect("mongodb+srv://softwareweb248_db_user:RgULyQ6Eg6T9HD3t@create-deployment.bmcdw3l.mongodb.net/dataEntryDB?retryWrites=true&w=majority")
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
